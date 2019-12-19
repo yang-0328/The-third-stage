@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // try catch
+        
+    //    console.log(age);
+    //    var sex = "男";
+    //    console.log(sex);
+    var fun = function(){
+        var ran = Math.random()*10;
+        if(ran<5){
+            throw new Error("结果不符合预期，小于5")
+        }else{
+            return ran
+        }
+    }
+    
+    try{
+        console.log(fun()); // 如果结果正常的话 如果出现问题的话
+    }catch(error) {
+        console.log(error)
+    }
+    console.log(123)
+    </script>
+</body>
+</html>

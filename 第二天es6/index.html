@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a = 10;
+        // let a = 11;
+        // console.log(a)
+        // 1. 
+        // var fun = function(a){
+        //     let a = 10;
+        //     console.log(a)
+        // }
+        // fun(1)
+        // 2. 
+        // var a = 10 , b = 20;
+        
+        // var arr = [a,b];
+        // [b,a] = arr;
+        // console.log(a,b)
+
+        /// 3. 
+        // let str  = `大家好，${iam} ${name},我们一起努力进步。`;
+        // 4. 
+
+        // var arr = [
+        //     {name:"张三",age:40},
+        //     {name:"张三",age:50},
+        //     {name:"李四",age:40},
+        //     {name:"王五",age:40},
+        //     {name:"张三",age:60},
+        //     {name:"赵六",age:40},
+        // ]
+        // var newArr = arr.filter(ele =>ele.name == "张三" && ele.age>=50);
+        // console.log(newArr)
+        // 5. 
+        // var arr = [1,2,3,-1,2,0,5,-3];
+        // var total = arr.reduce(function(total,current){
+        //     if(current < 0){
+        //         return total
+        //     }else{
+        //         return total = total + current
+        //     }
+        // },0)
+        // console.log(total)
+        // 6. 
+        // var arr = [4, 0, 7, 9, 0, 0, 2, 6, 0, 3, 1, 0];
+        // var newArr = arr.filter(ele => ele != 0);
+        // console.log(newArr);
+        // 7.[1,2,3,[4],6,[1,2,3,[4]]] =>[1,2,3,4,6,1,2,3,4]
+            var arr = [1,2,3,[4],6,[1,2,3,[4]]]; // [4]
+            function getArr (val){
+               return val.reduce(function(total,current){
+                    if(current instanceof Array){
+                        total.push(...getArr(current)) 
+                        return total
+                    }else{
+                        total.push(current)
+                        return total
+                    }
+                },[]);
+            }
+            console.log(arr , "改变之后的结果==>",getArr(arr));
+    </script>
+</body>
+</html>

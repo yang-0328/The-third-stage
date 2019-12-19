@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // var obj = {
+        //     name:"张三"
+        // }
+        // var obj1 = obj;
+        // obj.name = "李四"
+        // console.log(obj1);
+       // object assign  常用于对象的合并
+       // object assign 也是浅克隆 
+       var obj = {
+           sex:"男"
+       };
+       var per = {
+           name:"张三",
+           age:40,
+           car:{
+                price:100,
+                spName:"啤酒"
+           }
+       };
+       var newObj = Object.assign(obj,per);
+       per.age = 50;
+       per.car.price = 200;
+       console.log(newObj , obj , per);// 200 , 200 , 200
+       
+    </script>
+</body>
+</html>

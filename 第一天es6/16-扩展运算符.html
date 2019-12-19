@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // 扩展运算符  ...
+        // 常用作连接数组
+        var arr = [1,2,4];
+        // console.log(...arr);
+        var arr1 = [5,6,7];
+        // var newArr = arr.concat(arr1);
+        var newArr = [...arr,...arr1];
+        console.log(newArr);
+    </script>
+</body>
+</html>

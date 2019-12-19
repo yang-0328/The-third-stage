@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+</head>
+<body>
+    <div>
+        用户名<input type="text" id="username">
+    </div>
+    <div>
+        密码<input type="text" id="userpass">
+    </div>
+    <button id="btn">
+        登陆
+    </button>
+    <script>
+        // 登陆之后立即获取反馈信息  
+        // 反馈信息 依据与登陆之后返回的key值
+        // promise
+        // $("#btn").on("click",function(){
+        //     var user = $("#username").val();
+        //     var pass = $("#userpass").val();
+        //     login(user,pass);
+        // })
+        var apiKey = ""
+        function login(user,pass){
+            $.ajax({
+                type:"post",
+                url:"https://api.apiopen.top/developerLogin",
+                data: {
+                        name:4115241,
+                        passwd:411524
+                },
+                success(val){
+                    console.log(val.result.apikey);
+                    apiKey = val.result.apikey;
+                    getMsg(val.result.apikey)
+                },
+                failed(){
+
+                }
+            })
+        }
+        function getMsg(apiKey){
+            $.ajax({
+                type:"post",
+                url:"https://api.apiopen.top/getFeedback",
+                data: {
+                    apikey:apiKey,
+                },
+                success(val){
+                    console.log(val)
+                },
+                failed(val){
+                    console.log(val)
+                }
+            })
+        };
+        login();
+        
+    </script>
+</body>
+</html>

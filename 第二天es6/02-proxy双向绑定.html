@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <input type="text" id="ipt">
+    <script>
+        // proxy 实现视图(html页面)数据的双向绑定
+        // 输入框的改变会导致数据的改变  数据的改变也会导致输入框值的改变
+        var ipt = document.getElementById("ipt");
+        var obj = {
+            num:1
+        }
+        var pro = new Proxy(obj,{
+            set(target,key,val){
+                ipt.value = val;
+                obj[key] = val;
+            }
+        })
+        // onchange oninput onblur
+        ipt.oninput = function(){
+            obj.num = ipt.value;
+        }
+    </script>
+</body>
+</html>

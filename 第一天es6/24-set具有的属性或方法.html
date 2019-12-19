@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // set构造函数  里面成员的值都是唯一的
+
+        // var set = new Set();
+        // 1. 向set数据结构添加成员
+        // 2. set最主要用作数组去重
+        // 3. size 返回成员的总数 类似与数组的length
+        var set = new Set([1,1,2,2,3,4,4,5]); // 123456
+        console.log(set.size);
+        set.add(6);
+        set.add(5);
+        set.delete(6);
+        var bol = set.has(5); // 
+        set.clear();
+        console.log(set);
+        //Array.from(new Set())
+    </script>
+</body>
+</html>

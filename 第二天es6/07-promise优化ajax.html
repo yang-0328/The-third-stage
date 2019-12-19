@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+</head>
+<body>
+    <div>
+        用户名<input type="text" id="username">
+    </div>
+    <div>
+        密码<input type="text" id="userpass">
+    </div>
+    <button id="btn">
+        登陆
+    </button>
+    <script>
+        var apiKey;
+        // 1。 声明promise之后 Promise容器就有一个值 pending 待完成
+        // 2. resolve  之后 Promise容器状态由 pending ==>resolved 状态
+        // 3. reject 之后 Promise容器状态由 pending ==>rejected 状态
+        // 2,3步之后  promise 内部有了一个结果 resolve出去的结果和rejected结果
+        // 如果想要获取promise里面保存的结果的话 通过.then进行获取
+        // .then里面的第一个函数就是处理成功的结果  当promise状态为resolved
+        // 那么处理的就是成功的结果 
+        var pro = new Promise(function(resolve , reject){
+            $.ajax({
+                type:"post",
+                url:"https://api.apiopen.top/developerLogin",
+                data: {
+                        name:4115241,
+                        passwd:411524
+                },
+                success(res){
+                    resolve(res);
+                },
+                failed(msg){
+                    reject(msg);
+                }
+            })
+        })
+        var fun = function(resolve , reject){
+            $.ajax({
+                type:"post",
+                url:"https://api.apiopen.top/getFeedback",
+                data: {
+                    apikey:apiKey,
+                },
+                success(val){
+                    resolve(val)
+                },
+                failed(val){
+                    reject(val)
+                }
+            })
+        }
+        
+        pro
+        .then(res =>{ // 1. login方法
+            console.log(res);
+            apiKey = res.result.apikey;
+            return new Promise(fun)
+        },msg=>{
+
+        })
+        .then(res =>{ // 2. 执行第二步
+            console.log("第二步的结果",res)
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        var s1 = Symbol("原来具有的身高");
+        var s2 = Symbol("新添加的身高");
+       var person = {
+            age:40,
+            name:"张三",
+            eat(){
+                console.log("吃米饭的")
+            },
+            weight:60,
+            [s1]:170
+       }
+       person.sex = "男";
+       person.weight = 70;
+       person[s2] = 200
+       console.log(person)
+    //    person.eat=function(){
+
+    //    }
+    // symbol  表示独一无二的值
+    // var s1 = Symbol();
+    // var s2 = Symbol();
+    // var s3 = Symbol("这是定义的s3的值");// 
+    // //console.log(s1 == s2);
+    // console.log(s3.description);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       class Promise{
+            constructor(handle){
+                this.state = "pending";
+                this.result = null
+                this.onResolved = "";
+                this.onReJected = "";
+                handle(this.resolve.bind(this) , this.reject.bind(this))
+            }
+            resolve(val){
+                this.state = "success";
+                this.result = val
+                this.run();
+            }
+            reject(val){
+                this.state = "failed";
+                this.result = val;
+                this.run();
+            }
+            then(onResolved , onReJected){ // 
+                this.onResolved = onResolved;
+                this.onReJected = onReJected;
+                this.run();
+            }
+            run(){
+                if(this.state == "pending"){
+
+                }else{
+                    if(this.onResolved == "" || this.onReJected == ""){
+
+                    }else{
+                        if(this.state == "success"){
+                            this.onResolved(this.result);
+                        }else{
+                            this.onReJected(this.result);
+                        }
+                    }
+                    
+                }
+            }
+       }
+       var pro = new Promise(function(resolve , reject){
+           setTimeout(()=>{
+                var Random = Math.random()*10;
+                if(Random < 5){
+                    reject(Random)
+                }else{
+                    resolve(Random)
+                }
+           },3000)   
+       })
+       pro.then(res =>{
+            console.log("成功的结果==>",res)
+       },failed =>{
+            console.log("失败的结果==>",failed)
+       })
+    //    console.log(pro);
+    </script>
+</body>
+</html>

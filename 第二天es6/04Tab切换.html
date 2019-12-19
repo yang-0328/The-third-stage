@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #app .top {
+            display: flex;
+            align-items: center;
+        }
+        #app .top  li ,#app .bot  li{
+            padding: 10px;
+            margin: 0 20px;
+        }
+        #app .top  li.on{
+            color: red;
+        }
+        #app .bot {
+            display: flex;
+            align-items: center;
+        }
+        #app .bot  li{
+            display: none;
+        }
+        #app .bot .active{
+            display: block;
+        }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/1.10.1/jquery.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+    <script>
+        var arrs = [
+            {
+                tabname:"张三",
+                info:"张三位于郑州"
+            },
+            {
+                tabname:"李四",
+                info:"李四位于上海"
+            },
+            {
+                tabname:"王五",
+                info:"王五位于北京"
+            }
+        ]
+        class Tab{
+            constructor(el,arr){
+                this.el = el;
+                this.arr = arr;
+                this.initTop();
+                this.initBot();
+                this.change();
+            }
+            initTop(){
+                var str = ""
+                for(var i = 0;i<this.arr.length ; i++){
+                    str += `<li class="${i == 0 ? 'on' : ''}">${this.arr[i].tabname}</li>`
+                }
+                var el = `<ul class="top">${str}</ul>`;
+                $(`#${this.el}`).append(el);
+            }
+            initBot(){
+                var str = ""
+                for(var i = 0;i<this.arr.length ; i++){
+                    str += `<li class="${i == 0 ? 'active' : ''}">${this.arr[i].info}</li>`
+                }
+                var el = `<ul class="bot">${str}</ul>`;
+                $(`#${this.el}`).append(el);
+            }
+            change(){
+                $(`#${this.el}`).on("click",".top li",function(){
+                    $(this).addClass("on").siblings().removeClass("on");
+                    var index = $(this).index();
+                    var els = $(this).parent().siblings().find("li");
+                    els.eq(index).addClass("active").siblings().removeClass("active")
+                })
+            }
+        };
+
+        var tab = new Tab("app",arrs)
+    </script>
+</body>
+</html>

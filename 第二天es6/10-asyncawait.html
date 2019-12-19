@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // async 里面的return 作用 把return的结果作为resolve出去的结果
+        // await 只能在async中使用
+        // await 会返回结果 
+        // await 如果后面跟的是promise的话  那么await会直接获取promise里面的结果
+        var fun = function(){
+            return 1
+        };
+        var num = 1;
+        var bol = true;
+        var pro = new Promise(function(resolve){
+            setTimeout(function(){
+                resolve(222)
+            },3000)
+        })
+        async function fun1(){ // 
+            return 333
+        }
+        console.log(fun1())
+        // async function main(){
+        //     var age = await 123;
+        //     var bols = await bol;
+        //     var str = await "不凡学员";
+        //     var pro1 = await pro;
+        //     var pro2 = await fun1();
+        //     console.log(age , bols , str , pro1 , pro2)
+        // }
+        // main();
+    </script>
+</body>
+</html>

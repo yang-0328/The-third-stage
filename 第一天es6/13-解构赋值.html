@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // 解构赋值  /// 通过这种方式可以快捷的取出里面的变量
+        // 模式匹配 数组的解构赋值与下标有关
+        // 如果没有匹配到对应的数据的话  结果为undefined
+        // 
+    //   var arr = [1,2,3];
+      
+    //   var [a,b,c,d] = arr;
+    //   console.log(a,b,c,d) //  undefined 
+    //   var a = arr[0];
+    //   var b = arr[1];
+    //   var c = arr[3];
+        var arr = [1,2,34,[1,2,[4]]];
+        var [,,,[,,[a]]] = arr;
+        console.log(a)
+    </script>
+</body>
+</html>

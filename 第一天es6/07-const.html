@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // 当const 
+       //定义的变量是非引用数据类型的时候 不可对const定义的变量进行修改
+       // 当定义的变量是引用数据类型的时候  可以对引用数据类型的属性进行修改
+       const obj = {
+           name:"张三"
+       }
+       obj.name = "李四"
+       obj = 123;
+       console.log(obj)
+    </script>
+</body>
+</html>

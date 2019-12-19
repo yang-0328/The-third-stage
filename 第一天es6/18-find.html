@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+       // 数组 find方法  
+       // 找寻符合条件的第一个元素
+       // 如果找到符合条件的元素 会跳出循环 后面有符合条件的元素 也不会执行  
+       // 如果没有找到符合条件的元素 返回是undefined
+       var arr = [
+            {
+                num:1
+            },
+            {
+                num:2
+            },
+            {
+                num:3
+            },
+            {
+                num:4
+            }
+       ];
+    //    var newArr = [];
+    //    for(var i=0;i< arr.length;i++){
+    //        if(arr[i].num >=4){
+    //         newArr.push(arr[i].num);
+    //        }
+    //    }
+    //    console.log(newArr)
+        // var newArr = arr.find(function(ele,index,arr){
+        //     console.log(ele,index);
+        //     return ele.num>=3;
+        // })
+        var newArr = arr.find(ele =>ele.num>4);
+        console.log(newArr)
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+    //     var a1 = [123];
+    //     var f1 = function(){
+
+    //     };
+    //     var obj1 = {
+
+    //     }
+    //    var obj = {
+    //        num:1, /// key 仅仅是字符串
+    //        123:1,
+    //        [obj1]:4,
+    //        [f1]:3,
+    //        [a1]:2
+    //    }
+    //    console.log(obj)
+    // Map 数据结构 他的key值可以是任意的  
+    // map  size属性  用于返回成员的总数
+    // map  set用于添加成员  
+    // map  delete 用于删除成员
+    // map  has 用于判断是否存在当前map对象之中 返回布尔值   
+    // map  clear 用于清除map结构里面的所有数据
+
+    var m1 = new Map();
+    
+    const o = {p: 'Hello World'};
+    var arr1 = [123,2,1]
+    m1.set(o, 'content') // {o:"content"}
+    m1.set(arr1, '不凡学员') // {o:"content"}
+    //m1.delete(o);
+    m1.clear();
+    // console.log(m1.size);
+    // console.log(m1.has("arr11"));
+    console.log(m1);
+    </script>
+</body>
+</html>

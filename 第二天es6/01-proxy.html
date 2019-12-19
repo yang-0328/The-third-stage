@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在访问属性之前  我们先拦截访问的属性 拦截之后做其他的操作
+        // 需求  访问obj.name 让他输出 zhangsan
+        // proxy 给了用户能力 让我们可以拦截对某个属性的访问及赋值
+        var obj = {
+            name:"张三",
+            age:40
+        }
+        var pro = new Proxy(obj,{
+            get(target , props , proxy){
+                //console.log(target , props)
+                return "zhangsan"
+            },
+            set(target , key , value , proxy){
+                //console.log(target , key , value);
+                if(value > 120){
+                    throw new Error("年龄过大 反人类")
+                }else{
+                    target[key] = value
+                }
+            }
+        })
+        pro.age = 100;
+        console.log(pro)
+        //pro.name = "李四"
+        //console.log()
+        //console.log(obj.name) // 
+    </script>
+</body>
+</html>

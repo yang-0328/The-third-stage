@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // filter 对数据进行遍历 找到符合条件的全部元素
+        var person = [
+            {
+                name:"张三",
+                age:40,
+                sex:0 // 
+            },
+            {
+                name:"李四",
+                age:50,
+                sex:1 // 
+            },
+            {
+                name:"王五",
+                age:60,
+                sex:0 // 
+            },
+        ];
+        var f1 = person.filter((ele,index)=>{
+            return ele.age >= 50;
+        })
+        //var f2 = person.filter(ele => ele.age >=50)
+        console.log(f1)
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 箭头函数this指向问题 
+        // this指向的是父级 
+        var obj = {
+            names:"张三",
+            ale(){
+                // var that = this;
+                // var self = this;
+                // setTimeout(function(){
+                //     // setTimeout 会改变this的指向 setTimeout 改变this指向到window
+                //     // undefined
+                //     console.log(self.names); // 张三  报错 null 
+                // })
+                //alert(this.name); // 张三  
+                setTimeout(()=>{
+                    console.log(this.names)
+                })
+            }
+        }
+        obj.ale();
+    </script>
+</body>
+</html>

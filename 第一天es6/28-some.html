@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        // some 对数组进行遍历  返回值是布尔值 
+        // some 对数组进行遍历 如果有一项符合条件  返回的是true/ 都不符合  返回是false值
+        var person = [
+            {
+                name:"张三",
+                age:40,
+                sex:0 // 
+            },
+            {
+                name:"李四",
+                age:50,
+                sex:1 // 
+            },
+            {
+                name:"王五",
+                age:60,
+                sex:0 // 
+            },
+        ];
+        var bol = person.some((ele,index) => ele.age > 50 );
+        console.log(bol)
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过class 可以创建构造函数
+        // 通过class 构造类本质还是函数 
+        // class es6 提供的构造函数语法糖
+        // 继承 class extends 继承
+    //    function Person(name , age){
+    //        this.name = name;
+    //        this.age = age
+    //    }
+    //    Person.prototype.ale = function(){
+    //        alert(this.name);
+    //    }
+    //    var per = new Person("张三",40);
+        class Person {
+            constructor(name , age){ // 
+                this.name = name;
+                this.age = age;
+            }
+            ale(){
+                alert(this.name);
+            }
+            say(){
+                alert(this.age)
+            }
+        }
+        //var per = new Person("张三",40);
+        // per.ale();
+        // per.say();
+        class Per extends Person{
+            // 当继承的时候 只要写constructor 之后 必须要加上 super关键字
+            // 关键字super，指向当前实例对象的原型对象
+            constructor(a,b){
+                super(a,b);
+            }
+        }
+        var per1 = new Per("李四1",501);
+        per1.ale();
+        per1.say();
+    </script>
+</body>
+</html>

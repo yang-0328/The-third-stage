@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // promise
+        var num;
+        var per = new Promise(function(resolve,rejected){// 
+            // resolve 一般用于处理异步成功
+            // rejected 用于处理异步的钩子函数
+            setTimeout(()=>{
+                var random = Math.random()*10;
+                if(random > 5){
+                    resolve(random)
+                }else{
+                    rejected(random)
+                }
+            },3000);
+        })
+        // .then 用于获取promise所保存的结果
+        per.then(function(res){
+            console.log("成功的处理结果==>",res)
+        },function(msg){
+            console.log("失败的处理结果==>",msg)
+        })
+        //console.log(num); // undefined 10
+    </script>
+</body>
+</html>

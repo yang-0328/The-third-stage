@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     {
+         let age = 40;
+         console.log(age) // 40
+         {
+             //  变量优先级问题 
+             // 优先查找当前代码块内的变量
+            console.log(age) // 报错(没有被定义) 40 
+            let age = 30;
+            console.log(age) // 30
+         }
+     }
+    </script>
+</body>
+</html>

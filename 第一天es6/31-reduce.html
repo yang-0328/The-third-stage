@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+       // reduce 累加器 数组求和
+       var person = [
+            {
+                name:"张三",
+                age:40,
+                sex:0 // 
+            },
+            {
+                name:"李四",
+                age:50,
+                sex:1 // 
+            },
+            {
+                name:"王五",
+                age:60,
+                sex:0 // 
+            },
+            {
+                name:"赵六",
+                age:70,
+                sex:0 // 
+            },
+        ];
+        console.log(person)
+        var num = person.reduce(function(total,current){
+            console.log(total , current);
+            
+             total = total + current.age;
+             return total
+        },0)
+        console.log("reduce之后的结果",num)
+    </script>
+</body>
+</html>
