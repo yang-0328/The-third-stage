@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .parent{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .child{
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+   <!-- v-on 用于处理事件 -->
+   <!-- 处理事件冒泡 事件修饰符 -->
+   <!-- 阻止事件冒泡 stop修饰符 -->
+   <!-- 阻止默认事件 prevent修饰符 -->
+   <!-- capture 让事件以捕获的方式进行触发 -->
+    <div id="app" v-cloak class="app">
+       <div class="parent" @click.capture="parentEvent">
+           <div class="child" @click="childEvent">
+
+           </div>
+       </div>
+       <a href="https://www.baidu.com/" @click.prevent="">百度</a>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app", // element  el  作用 可以控制div里面的所有的元素
+            // 当学习vue之后 循环生成dom  vue可以自动根据数据来生成dom
+            data () { // data  数据仓库  页面所有的数据都保存在data里面
+                return {
+                   num:123
+                }
+            },
+            methods: {
+                parentEvent(){
+                    alert("父元素触发的事件");
+                },
+                childEvent(){
+                    alert("子元素触发的事件");
+                }
+            }
+        })
+    </script>
+</body>
+</html>

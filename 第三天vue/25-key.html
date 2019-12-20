@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak class="app">
+        <button @click="add">
+            点击添加元素
+        </button>
+        <ul>
+            <!-- for循环的时候 需要绑定一个唯一的一个key值 -->
+            <!-- key帮助vue区分 循环的元素 -->
+            <li v-for="item in list" :key="item.id">
+                <input type="checkbox">{{ item.name }}
+            </li>
+        </ul>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app", // element  el  作用 可以控制div里面的所有的元素
+            // 当学习vue之后 循环生成dom  vue可以自动根据数据来生成dom
+            data () { // data  数据仓库  页面所有的数据都保存在data里面
+                return {
+                    list:[
+                        {
+                            name:"白酒",
+                            id:Math.random()
+                        },
+                        {
+                            name:"啤酒",
+                            id:Math.random()
+                        },
+                        {
+                            name:"葡萄酒",
+                            id:Math.random()
+                        }
+                    ]
+                }
+            },
+            methods: {
+                add(){
+                    var obj = {
+                        name :"红酒",
+                        id:Math.random()
+                    };
+                    this.list.unshift(obj)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

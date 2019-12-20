@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- v-show 控制元素的显示和隐藏 -->
+    <!-- v-show 控制元素的显示和隐藏 通过display:none 进行控制 -->
+    <div  id="app" v-cloak class="app">
+        <h2 v-show="bol">
+            {{ name }}
+        </h2>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app", // element  el  作用 可以控制div里面的所有的元素
+            // 当学习vue之后 循环生成dom  vue可以自动根据数据来生成dom
+            data () { // data  数据仓库  页面所有的数据都保存在data里面
+                return {
+                    name:"张三",
+                    name1:"李四",
+                    bol:true,
+                    name2:"<span>赵六</span>"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

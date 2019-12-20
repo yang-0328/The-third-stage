@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app" class="app">
+        <!-- v-text v-html 作用都是一样 都是用于渲染数据 -->
+        <!-- v-html  可以用于渲染标签 -->
+        <h2 v-html="name1">
+        </h2>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app", // element  el  作用 可以控制div里面的所有的元素
+            // 当学习vue之后 循环生成dom  vue可以自动根据数据来生成dom
+            data () { // data  数据仓库  页面所有的数据都保存在data里面
+                return {
+                    name:"张三",
+                    name1:"李四",
+                    bol:true,
+                    name2:"<span>赵六</span>"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

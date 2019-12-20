@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- v-model  一般用于表单元素上的绑定 -->
+    <!-- 通过v-bind绑定的value 是单向绑定 -->
+    <!-- 数据的改变可以反映到页面上  页面上表单元素的改变不能反映到数据上 -->
+    <!-- 通过v-model 可以实现双向绑定 -->
+    <!-- 视图(页面)的改变会导致数据的改变  数据的改变也会导致视图的改变  -->
+    <div id="app" v-cloak class="app">
+        {{ iptVal }}
+        <input v-model="iptVal" type="radio" value="男">
+        <input v-model="iptVal" type="radio" value="女">
+       <button @click="getVal">
+           获取checkbox的值
+       </button>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app", // element  el  作用 可以控制div里面的所有的元素
+            // 当学习vue之后 循环生成dom  vue可以自动根据数据来生成dom
+            data () { // data  数据仓库  页面所有的数据都保存在data里面
+                return {
+                    iptVal:"女",
+                }
+            },
+            methods: {
+                getVal(){
+                    console.log(this.iptVal)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
