@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+        body,html{
+            height: 100%;
+        }
+        .mask{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            padding: 20px;
+            width: 200px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btngroup{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .info{
+            padding: 20px 0;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        
+        <masks >
+        </masks>
+    </div>
+    <template id="com">
+        <div>
+            123<child></child>
+        </div>
+     </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+              title:"",
+              info:"不凡学院",
+              img:"./img/logo.png",
+              isMaskShow:false,
+              tag:1
+          };
+        },
+        methods: {
+            ale(){
+                alert(this.info)
+            }
+        },
+        components:{
+            masks:{
+                template:"#com",
+                data () {
+                    return {
+                        info:"mask的详情"
+                    }
+                },
+                created () {
+                    // 获取父元素里面的属性或方法  this.$parent
+                    // 如果在组件当中使用了 this.$parent的话 组件的复用性将会大大的缩小
+                    // console.log(this.$parent.info)
+                },
+                components:{
+                    child:{
+                        template:"<h3>组件内的组件</h3>",
+                        created(){
+                            // $root 获取根元素里面的属性或者方法
+                            console.log(this.$root.ale())
+                        }
+                    }
+                }
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

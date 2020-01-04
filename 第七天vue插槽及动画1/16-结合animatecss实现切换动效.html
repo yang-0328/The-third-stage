@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/animate.css">
+    <style>
+      
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 过滤器  对指定的数据进行过滤  返回需要的数据 -->
+    <div id="app">
+       
+       <button @click="comShow = !comShow">
+           切换组件
+       </button>
+       <!-- enter-active-class 进入时需要用到的animate。css的class名称 -->
+       <transition 
+        mode="out-in" 
+        enter-active-class="fadeInRight animated"  
+        leave-active-class="fadeOutRight animated">
+            <com3 v-if="comShow"></com3>
+            <com4 v-else></com4>
+       </transition>
+       
+    </div>
+    <script>
+       
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            comShow:false,
+            current:"com",
+          };
+        },
+        methods: {
+          
+        },
+        components: {
+            com:{
+                template:"<h2>com组件内容<input type='text'>  </h2>"
+            },
+            com2:{
+                template:"<h3>com2组件内容</h3>"
+            },
+            com3:{
+                template:"<h3>com3组件内容</h3>"
+            },
+            com4:{
+                template:"<h3>com4组件内容</h3>"
+            },
+        }
+      });
+    </script>
+  </body>
+</html>

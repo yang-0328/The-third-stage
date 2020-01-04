@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+   <!-- 全局创建的组件  可以在任何vue实例中使用 -->
+   <!-- 局部创建的组件  只能在当前vue实例中使用 -->
+    <div id="app">
+        <com-and-com1></com-and-com1>
+    </div>
+    <script>
+        //  组件命名规则  
+        // 组件第一个字母不能大写
+        // 如果组件名称存在多个字母的话 在组件命名中不推荐驼峰命名
+        // 使用-连字符连接
+        Vue.component("comAndCom1",{
+            template:"<div>全局组件</div>"
+        })
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+          };
+        },
+        components: {
+            com:{
+                template:"<h3>不凡学院</h3>"
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

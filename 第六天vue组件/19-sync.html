@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    
+    <div id="app">
+        <com :names.sync="names"></com>
+    </div>
+    <!-- template  html5 提供的标签 不会显示到当中 -->
+    <template id="com1">
+        <div @click="postMsg">
+            父元素传递给子组件的值为: {{ names }}
+        </div>
+    </template>
+    <script>
+        var bus = new Vue();
+      var vm = new Vue({ // vm 是组件的父级
+        el: "#app",
+        data() {
+          return {
+              bol:true, // this.bol vm.bol
+              names:"张三",
+              age:50,
+              com1Names:""
+          };
+        },
+        methods:{
+        },
+        components: {
+            com:{
+                props: ["names"],
+                template:"#com1",
+                methods:{
+                    postMsg(){
+                        this.$emit("update:names","李四")
+                    }
+                }
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

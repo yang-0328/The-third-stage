@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./lib/vue.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/aside.js"></script>
+</head>
+<body>
+    <div id="app">
+        <headers></headers>
+        <div class="content">
+            <asides current="info"></asides>
+            <div class="main">
+                <h3>详情页</h3>
+                <div class="index">
+                    <div class="per" v-if="isShow">
+                        <div class="t">
+                            <div class="l">
+                                标题:<span>{{ item.title }}</span> 
+                            </div>
+                            
+                            <div class="r">
+                                {{ item.time }}
+                            </div>
+                        </div>
+                        <div>
+                            发布作者:{{ item.auther }}
+                        </div>
+                        <div class="b">
+                            {{ item.info }}
+                        </div>
+                        <button @click="isShow = !isShow" class="upt" v-if="item.auther == account">
+                            修改
+                        </button>
+                    </div>
+                    <div class="per" v-else>
+                        <div class="t">
+                            <div class="l">
+                                标题:<span><input type="text" v-model=" item.title"></span> 
+                            </div>
+                            
+                            <div class="r">
+                                {{ item.time }}
+                            </div>
+                        </div>
+                        <div>
+                            发布作者:{{ item.auther }}
+                        </div>
+                        <div class="b">
+                            <textarea v-model="item.info">
+
+                            </textarea>
+                        </div>
+                        <button @click="save" class="upt" v-if="item.auther == account">
+                            保存
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    list:[],
+                    item:{},
+                    account:"",
+                    isShow:true
+                }
+            },
+            methods: {
+                save(){
+                    var serachs = window.location.search.split("=")[1];
+                    var list = JSON.parse(localStorage.getItem("lists"));
+                    var items = list.find(ele => ele.id == serachs);
+                    items.title = this.item.title;
+                    items.info = this.item.info;
+                    console.log(list);
+                    localStorage.setItem("lists",JSON.stringify(list));
+                    this.isShow = !this.isShow;
+                    alert("保存成功")
+                }
+            },
+            created () {
+                var account = localStorage.getItem("account");
+                this.account = account;
+                var serachs = window.location.search.split("=")[1];
+                
+                var item = JSON.parse(localStorage.getItem("lists")).find(ele => ele.id == serachs);
+                console.log(item);
+                this.item = item;
+            }
+        })
+    </script>
+</body>
+</html>

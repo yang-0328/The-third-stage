@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./lib/vue.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/aside.js"></script>
+</head>
+<body>
+    <div id="app">
+        <headers></headers>
+        <div class="content">
+            <asides current="add"></asides>
+            <div class="main">
+               <h3>新增留言板</h3>
+               <ul>
+                   <li>
+                       <label for="">标题</label>
+                       <input type="text" v-model.trim="title">
+                   </li>
+                   <li>
+                        <label for="">内容</label>
+                        <input type="text" v-model.trim="info">
+                    </li>
+               </ul>
+               <div class="btnGroup">
+                    
+                    <button v-if="title && info" @click="save">
+                        提交
+                    </button>
+                    <button v-else="">
+                        请填写完整表单
+                    </button>
+               </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    title:"",
+                    info:""
+                }
+            },
+            methods: {
+                save(){
+                    if(localStorage.getItem("lists")){
+                        var lists = JSON.parse(localStorage.getItem("lists"));
+                        var obj = {
+                            title:this.title,
+                            info:this.info,
+                            id:Math.random(),
+                            time:new Date().toLocaleString(),
+                            auther:localStorage.getItem("account")
+                        };
+                        lists.push(obj);
+                        localStorage.setItem("lists",JSON.stringify(lists))
+                    }else{
+                        var arr = [];
+                        var obj = {
+                            title:this.title,
+                            info:this.info,
+                            id:Math.random(),
+                            time:new Date().toLocaleString(),
+                            auther:localStorage.getItem("account")
+                        };
+                        arr.push(obj);
+                        localStorage.setItem("lists",JSON.stringify(arr))
+                    }
+                    this.title = "";
+                    this.info = "";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

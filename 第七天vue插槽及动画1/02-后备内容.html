@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <!-- <h2 :title="title">标题</h2> -->
+        <com>123</com>
+    </div>
+    <template id="com">
+        <h2>
+            <!-- 后备内容 -->
+            <!-- 当组件没有携带内容的时候插槽默认所显示的内容 -->
+            <!-- 当组件有携带内容的时候显示的就是携带的内容 -->
+            组件模板内容<slot>不凡学院</slot>
+        </h2>
+    </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+              title:"标题"
+          };
+        },
+        components:{
+            com:{
+                template:"#com"
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

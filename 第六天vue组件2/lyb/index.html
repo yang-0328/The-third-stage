@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./lib/vue.js"></script>
+    <script src="./js/header.js"></script>
+    <script src="./js/aside.js"></script>
+</head>
+<body>
+    <div id="app">
+        <headers></headers>
+        <div class="content">
+            <asides current="index"></asides>
+            <div class="main">
+                <h3>列表页</h3>
+                <div class="index">
+                    <div class="per" v-for="item in  list" :key="item.time">
+                        <div class="t">
+                            <div class="l">
+                                <span>{{ item.title }}</span> by <b>{{ item.auther }}</b>
+                            </div>
+                            <div class="r">
+                                {{ item.time }}
+                            </div>
+                        </div>
+                        <div class="b">
+                            <a :href="`./info.html?id=${item.id}`">{{ item.info }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    list:[]
+                }
+            },
+            created () {
+                if(localStorage.getItem("lists")){
+                    this.list = JSON.parse(localStorage.getItem("lists"))
+                }
+            }
+        })
+    </script>
+</body>
+</html>

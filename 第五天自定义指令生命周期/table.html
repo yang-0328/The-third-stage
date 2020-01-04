@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        .on{
+            color: red;
+        }
+        #app{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .top{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        table{
+            width: 100%;
+        }
+        td,th{
+            padding: 10px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <h2>增删改查</h2>
+        <h3>查找的时候 保留原数据 删除修改的时候原数据还可以进行修改</h3>
+        {{ lists }}
+      <div class="top">
+          
+        <div class="l">
+            id: <input id="ipt" type="text" v-model="id">
+            名称: <input type="text" v-model="name">
+            数量: <input type="text" v-model="num">
+            <button @click="add">添加</button>
+        </div>
+        <div class="r">
+            <input type="text"  v-model="searchs">
+        </div>
+      </div>
+      <div class="main">
+        <table border="1" cellspacing="0" cellspadding="0">
+            <tr>
+                <th>全选<input type="checkbox" v-model="isAllChecked"></th>
+                <th>id</th>
+                <th>name</th>
+                <th>num</th>
+                <th>ctime</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item , index) in lists" :key="item.id">
+                <td>
+                    <input type="checkbox" v-model="item.isChecked">
+                </td>
+                <td>
+                    {{ item.id }}
+                </td>
+                <td>
+                    {{ item.name }}
+                </td>
+                <td>
+                    
+                    <div @click="focus1($event,item.id)" v-show="!item.isIptShow">
+                        {{ item.num }}
+                    </div>
+                    <input @blur="item.isIptShow = !item.isIptShow" autofocus v-show="item.isIptShow" type="text" v-model="item.num">
+                </td>
+                <td>
+                    {{ item.ctime }}
+                </td>
+                <td>
+                    <button @click="del(item.id)">删除</button>
+                </td>
+            </tr>
+        </table>
+      </div>
+      <div class="bot">
+        总计:{{ total }}
+      </div>
+    </div>
+    <script>
+        
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            id:"",
+            name:"",
+            num:"",
+            searchs:"",
+            list:[
+                {
+                    name:11,
+                    num:1,
+                    isIptShow:false,
+                    isChecked:false,
+                    id:parseInt(Math.random()*100),
+                    ctime:new Date().toLocaleString()
+                },
+                {
+                    name:12,
+                    num:1,
+                    isIptShow:false,
+                    isChecked:false,
+                    id:parseInt(Math.random()*100),
+                    ctime:new Date().toLocaleString()
+                },
+                {
+                    name:22,
+                    num:1,
+                    isIptShow:false,
+                    isChecked:false,
+                    id:parseInt(Math.random()*100),
+                    ctime:new Date().toLocaleString()
+                },
+                {
+                    name:12322,
+                    num:1,
+                    isIptShow:false,
+                    isChecked:false,
+                    id:parseInt(Math.random()*100),
+                    ctime:new Date().toLocaleString()
+                },
+            ]
+          };
+        },
+        computed: {
+            // lists  既可以返回原数据 又可以返回筛选过后的数据
+            lists(){
+                return this.list.filter(ele => JSON.stringify(ele.name).includes(this.searchs));
+            },
+            isAllChecked:{
+                get(){
+                    return this.list.every(ele => ele.isChecked );
+                },
+                set(val){
+                    this.list.forEach(ele => ele.isChecked =  val)
+                }
+            },
+            total(){
+                return this.list.reduce(function(total,current){
+                    if(current.isChecked ){
+                        return total += current.num
+                    }else{
+                        return total
+                    }
+                },0)
+            }
+        },
+        methods: {
+            focus1(e,id){
+                // vue在更新dom的时候  我们并不能直接获取到更新之后的dom
+                var ele = this.list.find(ele => ele.id == id);
+                ele.isIptShow = true;
+                // 在dom更新完毕之后立即执行的回调函数执行的操作 页面显示的dom结构是最新的 
+                this.$nextTick(function(){
+                    var el = Array.from(e.target.parentNode.childNodes);
+               
+                    var item = el.find(ele => ele.nodeName == "INPUT");
+                    console.log(item)
+                    item.focus();
+                })
+                // setTimeout(function(){
+                //     var el = Array.from(e.target.parentNode.childNodes);
+               
+                //     var item = el.find(ele => ele.nodeName == "INPUT");
+                //     console.log(item)
+                //     item.focus();
+                // })
+               
+            },
+            search(){
+               this.list =  this.list.filter(ele => JSON.stringify(ele.name).includes(this.searchs))
+            },
+            del(val){
+                var index = this.list.findIndex(ele => ele.id == val);
+                this.list.splice(index , 1)
+            },
+            add(){
+                var bol = this.list.some(ele => ele.id == this.id )
+                if(this.id == ""){
+                    return 
+                }
+
+                if(bol){ // 
+                    alert("id 相同不能添加")
+                    return 
+                }
+                if(this.name == ""){
+                    return 
+                }
+                if(this.num == ""){
+                    return 
+                }
+                var obj = {
+                    name:this.name,
+                    num:this.num,
+                    id:this.id,
+                    isChecked:false,
+                    isIptShow:false,
+                    ctime:new Date().toLocaleString()
+                };
+                this.list.push(obj);
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

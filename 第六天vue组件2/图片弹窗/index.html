@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 700px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        ul li{
+            width: 200px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        .mask{
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.6);
+        }
+    </style>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/mock.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 传递数据为什么不能传递引用数据类型的数据 -->
+            <com v-for="item in list" 
+            @myevent="doSomething"
+            :img="item.img" 
+            :id="item.id"
+            :imgsrc.sync="imgsrc"
+            :is-mask-show.sync="isMaskShow"
+            :title.sync="item.title"></com>
+            
+        </ul>
+        <div class="mask" v-if="isMaskShow" @click.self="isMaskShow = false">
+            1231
+            <img :src="imgsrc" alt="">
+        </div>
+    </div>
+    <template id="com">
+        <li>
+            <img :src="img" alt="">
+            <p v-if="!isIptShow">
+                {{ title }}
+            </p>
+            <input type="text" @blur="emitTitle" v-model="titles" v-focus v-else>
+            <div>
+                <button @click="childDel">删除</button>
+                <button @click="isIptShow = !isIptShow">编辑</button>
+                <button @click="pic">查看大图</button>
+            </div>
+        </li>
+    </template>
+    <script>
+        var Random = Mock.Random;
+       var vm = new Vue({
+           el:"#app",
+           data () {
+               return {
+                   list:[],
+                   imgsrc:"",
+                   isMaskShow:false
+               }
+           },
+           components: {
+               com:{
+                   props:["img","title","item","id","isMaskShow","imgsrc"],
+                   template:"#com",
+                   data () {
+                       return {
+                        isIptShow:false,
+                        titles:this.title
+                       }
+                   },
+                   directives: {
+                        focus:{
+                            inserted(el){
+                                el.focus();
+                            }
+                        }
+                   },
+                   methods:{
+                    pic(){
+                        this.$emit("update:imgsrc",this.img);
+                        this.$emit("update:isMaskShow",true);
+                    },
+                    emitTitle(){
+                        this.$emit("update:title",this.titles);
+                        this.isIptShow = !this.isIptShow;
+                    },
+                    upt(){
+                        // 如果你觉得组件传值比较麻烦 可以不遵循单向数据流原则
+                        // 如果多人开发的话 需要遵循单向数据流原则 数据的更改只能在父组件中修改
+                        //  
+                        // this.item.title = "123";
+                        // this.title = 123
+                        
+                    },
+                   
+                    childDel(){
+                        console.log("myEvent")
+                        this.$emit('myevent',this.id)
+                        // this.$emit("childdels",this.id);
+                    }
+                   }
+               }
+           },
+           methods: {
+                init(){ // 生成页面对应的数据
+                    var arr = [];
+                    for(var i = 0; i<5;i++){
+                        var obj = {
+                            id:Random.guid(),
+                            img:Random.dataImage('200x100'),
+                            title:Random.ctitle()
+                        };
+                        arr.push(obj)
+                    };
+                    this.list = arr;
+                },
+                doSomething(id){
+                    console.log(id)
+                    var index = this.list.findIndex(ele => ele.id == id);
+                    this.list.splice(index , 1)
+                }
+           },
+           created () {
+               this.init();
+           }
+       })
+    </script>
+</body>
+</html>

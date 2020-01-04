@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 计算属性默认是不能被修改的   -->
+      
+      <!-- 如果想要修改 通过seter进行修改 -->
+    <div id="app">
+        {{ list }}
+       <ul>
+           <li v-for="(item , index) in list"> 
+              <input type="checkbox" v-model="item.isChecked"> {{ item.name }}
+              请输入购买的数量<input type="text" v-model="item.num">
+              单价{{ item.price }}
+           </li>
+       </ul>
+       <div>
+           全选<input type="checkbox" v-model="isAllChecked"> 总价 {{ totals }}
+       </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            isa:false,
+            list:[
+                {
+                    isChecked:false,
+                    name:"苹果",
+                    price:1,
+                    num:1
+                },
+                {
+                    isChecked:true,
+                    name:"橘子",
+                    price:2,
+                    num:1
+                },
+                {
+                    isChecked:false,
+                    name:"香蕉",
+                    price:3,
+                    num:1
+                },
+            ]
+          };
+        },
+        computed: {
+            totals(){ // 
+                return this.list.reduce((totals,current)=>{
+                    if(current.isChecked) {
+                        return totals = totals + current.price*current.num
+                    }else{
+                        return totals
+                    }
+                },0)
+            },
+            // 用于判断是否全选以及没全选
+            // isAllChecked(){
+            //     return this.list.every(ele => ele.isChecked == true );
+            // },
+            isAllChecked:{
+                get(){
+                    return this.list.every(ele => ele.isChecked == true );
+                },
+                // 计算属性默认是不能被修改的
+                // 通过set 可以修改计算属性
+                set(val){
+                    console.log(val);
+                    this.list.forEach(ele => ele.isChecked = val);
+                   
+                }
+            }
+        },
+        methods: { // 方法
+           
+        }
+      });
+    </script>
+  </body>
+</html>

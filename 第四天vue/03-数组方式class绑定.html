@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        .on{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+        .green{
+            color: yellow;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 2. 对象的方式绑定class名称 -->
+    <div id="app">
+        <h2>
+            num > 5 < 7  红色的样式 
+            <br>
+            num > 7 < 10  蓝色的样式
+            <br>
+            num > 10 < 12  绿色的样式
+        </h2>
+        <!-- <span :class="[ num > 5 && num < 7 ? 'on' :'' , 
+            num > 7 && num < 10 ? 'blue' :''
+            ]" >
+            {{ num }}
+        </span> -->
+        <span :class="[{ on : num > 5 && num < 7 , 
+            blue : num > 7 && num < 10}]">
+            {{ num }}
+        </span>
+        <button @click="add">
+            增加
+        </button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+           num:4,
+           obj:{
+               name:"张三"
+           }
+          };
+        },
+        methods: {
+            add(){
+                this.num ++ ;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

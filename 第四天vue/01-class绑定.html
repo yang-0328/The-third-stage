@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        .on{
+            color: red;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 三元运算符动态绑定class -->
+    <div id="app">
+        <span :class=" num>=10 ? 'on' : ''">
+            {{ num }}
+        </span>
+        <button @click="add">
+            增加
+        </button>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+           num:5
+          };
+        },
+        methods: {
+            add(){
+                this.num ++ ;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a{
+    color: #555;
+    text-decoration: none;
+}
+.top{
+    padding: 0 60px;
+    height: 70px;
+    border-bottom: 1px solid #ccc;
+    background: #F7F7F7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.top .box{
+    position: relative;
+    height: 70px;
+}
+.top .r{
+    display: block;
+    height: 100%;
+    padding:0 10px;
+    line-height: 70px;
+}
+.top .r:focus{
+    background: #ccc;
+}
+.top .logout{
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+    padding: 0 10px;
+    
+    z-index: 999;
+}
+.login{
+    width: 300px;
+    height: 270px;
+    margin: 20px auto;
+    background: #F7F7F7;
+    display: flex;
+    padding: 0 100px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.login >div{
+    width: 100%;
+}
+.login input , .login button{
+    width: 100%;
+} 
+.login button{
+    margin-top: 20px;
+}
+
+.logout{
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-top: 0;
+}
+
+.content{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.aside{
+    width: 180px;
+    margin: 0 20px;
+}
+.aside h2{
+    border: 1px solid #ccc;
+    width: 155px;
+    padding: 6px 12px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 16px;
+}
+.aside li{
+    width: 155px;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.aside .on{
+    background: #31B0D5;
+    color: #fff;
+}
+.aside .on a{
+    color: #fff;
+}
+.main{
+    flex: 1;
+}
+.main h3{
+    padding: 8px 15px;
+    background: #F5F5F5;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+.main ul li label{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.main ul li input{
+    width: 100%;
+}
+.main .btnGroup{
+    padding-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.index{
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    padding: 15px 15px 40px;
+    position: relative;
+}
+.index .per .t{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.index .per .t span , .index .per .t b{
+    color: #337ab7;
+}
+.index .per {
+    padding-top: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.upt{
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+}

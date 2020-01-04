@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        table{
+            width: 100%;
+        }
+        th,td{
+            padding: 10px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        {{ list }}
+        <table border="1" cellspacing="0" cellspadding="0">
+            <tr>
+                <th>名称</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>电话号码</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item , index) in list" :key="index">
+                <td @click="ale(item.name)">
+                    {{ item.name }}
+                </td>
+                <td>
+                    {{ item.sex == 0 ? "男" : "女" }}
+                </td>
+                <td>
+                    {{ item.age }}
+                </td>
+                <td>
+                    {{ item.tel }}
+                </td>
+                <td>
+                    <button @click="del(index)">
+                        删除
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            list: [
+              { name: "张三", sex: 0, age: 30, tel: 12312341234 },
+              { name: "李四", sex: 1, age: 50, tel: 12312341234 },
+              { name: "王五", sex: 0, age: 40, tel: 12312341234 },
+              { name: "赵六", sex: 1, age: 50, tel: 12312341234 }
+            ]
+          };
+        },
+        methods: {
+            ale(val){
+                alert(val)
+            },
+            del(val){
+                this.list.splice(val , 1 )
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

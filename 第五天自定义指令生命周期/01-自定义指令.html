@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        .on{
+            color: red;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 三元运算符动态绑定class -->
+    <div id="app">
+      <div v-red v-html="">
+          123 {{ }}
+      </div>
+    </div>
+    <script>
+        // 封装指令有两种方式  
+        // 1. 全局封装指令
+        Vue.directive("red",{
+            // inserted 在dom渲染的时候执行的操作
+            inserted(el,binding){ // 指令绑定的元素(把虚拟dom树的结构渲染到也买你里面)插入到dom的时候执行的钩子函数
+                console.log(el)
+                el.style.color = "blue"
+            },
+            // bind  是在内存中执行的绑定操作
+            bind(el,binding){ // 当指令绑定到对应的元素的时候执行的钩子函数
+                console.log(el);
+                el.style.color = "red"
+            },
+        })
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+          
+          };
+        },
+        methods: {
+           
+        }
+      });
+    </script>
+  </body>
+</html>

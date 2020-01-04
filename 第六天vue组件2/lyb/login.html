@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./lib/vue.js"></script>
+    <script src="./js/header.js"></script>
+</head>
+<body>
+    <div id="app">
+        <headers></headers>
+        <div class="login">
+            <div>
+                <input type="text" v-model.trim="account" placeholder="输入用户名即可登陆">
+                <button @click="login">登陆</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data () {
+                return {
+                    account:""
+                }
+            },
+            methods: {
+                login(){
+                    localStorage.setItem("account",this.account);
+                    window.location.href = "./index.html"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

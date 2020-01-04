@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+.top ul{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.top ul li {
+   width: 73px;
+   margin:0 30px;
+   text-align: center;
+   align-items: center;
+   height: 100%;
+   line-height: 40px;
+}
+.top ul .on{
+    border-bottom: 1px solid red;
+}

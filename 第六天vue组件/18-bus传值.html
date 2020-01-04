@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    
+    <div id="app">
+        <com></com>
+        <com2></com2>
+    </div>
+    <!-- template  html5 提供的标签 不会显示到当中 -->
+    <template id="com1">
+        <div @click="postMsg">
+            这是组件1的模板内容
+        </div>
+    </template>
+    <template id="com2">
+        <div>
+            这是组件2的模板内容{{ names }}
+        </div>
+    </template>
+    <script>
+        var bus = new Vue();
+      var vm = new Vue({ // vm 是组件的父级
+        el: "#app",
+        data() {
+          return {
+
+          };
+        },
+     
+        components: {
+            com:{
+                template:"#com1",
+                data(){
+                    return {
+                        names:"小明"
+                    }
+                },
+                methods:{
+                    postMsg(){
+                        bus.$emit("postMsg",this.names) 
+                    }
+                }
+            },
+            com2:{
+                template:"#com2",
+                data(){
+                    return {
+                        names:"",
+                      
+                    }
+                },
+                created () {
+                    const _this = this;
+                    // 回调函数需要用箭头函数的写法
+                    bus.$on("postMsg",(val) => {
+                        console.log(val,this)
+                        this.names = val;
+                    })
+                }
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

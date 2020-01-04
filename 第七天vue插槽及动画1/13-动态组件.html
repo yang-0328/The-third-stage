@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        table{
+            width: 100%;
+        }
+        th,td{
+            padding: 10px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 过滤器  对指定的数据进行过滤  返回需要的数据 -->
+    <div id="app">
+        <button @click="current == 'com' ? current = 'com2' : current = 'com'">
+            切换
+        </button>
+        <!-- <com v-if="comShow"></com> 
+        <com2 v-else></com2> -->
+        <!-- keep-alive vue 提供的组件 帮助缓存组件当中的状态 -->
+        <keep-alive >
+            <components :is="current"></components>
+        </keep-alive>
+        
+    </div>
+    <script>
+       
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            comShow:false,
+            current:"com"
+          };
+        },
+        methods: {
+          
+        },
+        components: {
+            com:{
+                template:"<h2>com组件内容<input type='text'>  </h2>"
+            },
+            com2:{
+                template:"<h3>com2组件内容</h3>"
+            },
+        }
+      });
+    </script>
+  </body>
+</html>

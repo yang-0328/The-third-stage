@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        table{
+            width: 100%;
+        }
+        th,td{
+            padding: 10px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 过滤器  对指定的数据进行过滤  返回需要的数据 -->
+    <div id="app">
+        {{ list }}
+        <table border="1" cellspacing="0" cellspadding="0">
+            <tr>
+                <th>名称</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>电话号码</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="(item , index) in list" :key="index">
+                <td @click="ale(item.name)">
+                    {{ item.name }}
+                </td>
+                <td>
+                    <!-- sex 第一次 返回男女  第二次过滤 返回男同志  女同学 -->
+                    {{ item.sex | sex1 | sex2 }}
+                </td>
+                <td v-html="item.age | ages">
+                    
+                </td>
+                <td>
+                    {{ item.tel }}
+                </td>
+                <td>
+                    <button @click="del(index)">
+                        删除
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        Vue.filter("sexs",function(val){
+            console.log(val);
+            if(val == 0){
+                return "男"
+            }else{
+                return "女"
+            }
+        })
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            list: [
+              { name: "张三", sex: 0, age: 30, tel: 12312341234 },
+              { name: "李四", sex: 1, age: 50, tel: 12312341234 },
+              { name: "王五", sex: 0, age: 40, tel: 12312341234 },
+              { name: "赵六", sex: 1, age: 50, tel: 12312341234 }
+            ]
+          };
+        },
+        filters:{
+            ages(val){
+                if(val == 30){
+                    return "青年"
+                }else if(val == 40){
+                    return "中年"
+                }else{
+                    return "老年"
+                }
+            },
+            sex1(val){
+                if(val == 0){
+                    return "女"
+                }else{
+                    return "男"
+                }
+            },
+            sex2(val){
+                if(val == "男"){
+                    return  "男同志"
+                }else{
+                    return  "女同学"
+                }
+            },
+        },
+        methods: {
+            ale(val){
+                alert(val)
+            },
+            del(val){
+                this.list.splice(val , 1 )
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

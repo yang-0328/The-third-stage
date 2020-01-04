@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    
+    <div id="app">
+        <!-- 单向数据流 -->
+        <!-- 父元素值的更改会导致子组件值的更改  -->
+        <!-- 在组件里面不能修改父元素传递过来的属性 -->
+        <com :bols="bol" :names="names" :person-age="age"></com>
+    </div>
+    <script>
+      var vm = new Vue({ // vm 是组件的父级
+        el: "#app",
+        data() {
+          return {
+              bol:true, // this.bol vm.bol
+              names:"张三",
+              age:40
+          };
+        },
+        components: {
+            com:{ // com组件是vm的子集
+                data(){
+                    return {
+                        num:10,
+                        age:this.personAge
+                    }
+                },
+                /// 通过data里面属性的接收仅仅是避免报错 而不能修改父元素里面的值
+                props:["bols","names" , "personAge"],
+                template:"<h3 @click=' age++ '>不凡学院{{ age }}</h3>"
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

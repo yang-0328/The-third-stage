@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+        .on{
+            color: red;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 三元运算符动态绑定class -->
+    <div id="app">
+        <h2>需要做的:当input显示的时候聚焦</h2>
+      <input v-focus type="text" v-if="isIptShow">
+      <button @click="isIptShow = !isIptShow">
+          切换input框的显示和隐藏
+      </button>
+    </div>
+    <script>
+       Vue.directive("focus",{
+           // 在内存中聚焦 也显示不到页面里面
+           // bind 一般用于修改样式
+           bind(el){
+            //el.focus()
+           },
+           // 插入到dom的时候执行的钩子函数
+           // 进行JS中的有关操作
+           inserted(el){
+            el.focus()
+           }
+       })
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            isIptShow:false
+          };
+        },
+        methods: {
+           
+        }
+      });
+    </script>
+  </body>
+</html>

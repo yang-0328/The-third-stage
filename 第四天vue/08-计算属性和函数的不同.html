@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      
+    <div id="app">
+        <!-- 1. 计算属性写在computed里里面 函数写在methods里面 -->
+        <!-- 2. 计算属性调用的时候不需要加括号 函数需要加括号 -->
+        <!-- 3. 计算属性会缓存计算过的结果  而函数不会 -->
+        <!-- 计算属性 当其依赖的值发生改变的时候 计算属性会重新计算 
+            并且对结果进行缓存 -->
+        <!-- 如果多次调用这个计算属性 
+            那么第二次及以后获取的值将会从缓存中进行读取 
+            对页面优化很有帮助
+          -->
+          <!-- 4. 计算属性会返回一个与数据仓库里面属性有关的值 -->
+        <div>
+            请输入姓:<input type="text" v-model="userFirstName">
+        </div>
+        <div>
+            请输入名:<input type="text" v-model="userLastName">
+        </div>
+        <div>
+            <!-- {{ total() }}
+            姓名为<input type="text" v-model="total()"> -->
+            <!-- {{ totals }} -->
+            <!-- 方法 一般调用的时候才会执行  如果没调用 也不让执行 -->
+            姓名为<input type="text" v-model="total()">
+            {{ total() }}{{ total() }}{{ total() }}
+        </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            rmb:"",
+            userFirstName:"",
+            userLastName:""
+          };
+        },
+        // computed  和 methods都是差不多
+        computed: { // 计算属性
+            // num(){ // num  计算属性 
+            //     return this.rmb * 0.1427
+            // }
+            totals(){
+                console.log(1)
+                return  this.userFirstName + this.userLastName;
+            }
+        },
+        methods: { // 方法 // 调用的执行的方法
+            total(){
+                console.log(123)
+                return  this.userFirstName + this.userLastName;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

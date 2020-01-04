@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        /* enter 进入的意思  */
+        /* v-enter 显示的初始状态 */
+        /* v开头的class名称 只要有组件切换 都会应用切换的过渡动效 */
+       .v-enter{
+        opacity: 0;
+       }
+       /* v-enter-to 显示的结束状态 */
+       .v-enter-to{
+        opacity: 1;
+       }
+       /* v-enter-active */
+       .v-enter-active{
+        transition: 3s ease-in;
+       }
+       /* leave 离开 */
+       /* v-leave 离开时的初始状态 */
+       .v-leave{
+        opacity: 1;
+       }
+       /* v-leave 离开时的结束状态 */
+       .v-leave-to{
+        opacity: 0;
+       }
+       /* 初始和离开一过程 */
+       .v-leave-active{
+        transition: 3s ease-in;
+       }
+       /* 自定义class名称 */
+       /* fadeInLeft-enter 进入时的初始状态 */
+        .fadeInLeft-enter{
+            transform: translateX(100%);
+        }
+        /* fadeInLeft-enter 进入时的离开状态 */
+        .fadeInLeft-enter-to{
+            transform:translateX(0);
+        }
+        /* fadeInLeft-enter-active 进入时的过渡过程 */
+        .fadeInLeft-enter-active{
+            transition: 1s ease-in;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 过滤器  对指定的数据进行过滤  返回需要的数据 -->
+    <div id="app">
+        <button @click="current == 'com' ? current = 'com2' : current = 'com'">
+            切换
+        </button>
+        <!-- <com v-if="comShow"></com> 
+        <com2 v-else></com2> -->
+        <!-- keep-alive vue 提供的组件 帮助缓存组件当中的状态 -->
+        <!-- mode 属性 控制动画切换的过程 out-in in-out -->
+        <transition mode="in-out">
+            <components :is="current"></components>
+        </transition>
+        <hr>
+       <button @click="comShow = !comShow">
+           切换组件
+       </button>
+       <transition name="fadeInLeft">
+            <com3 v-if="comShow"></com3>
+            <com4 v-else></com4>
+       </transition>
+       
+    </div>
+    <script>
+       
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            comShow:false,
+            current:"com",
+          };
+        },
+        methods: {
+          
+        },
+        components: {
+            com:{
+                template:"<h2>com组件内容<input type='text'>  </h2>"
+            },
+            com2:{
+                template:"<h3>com2组件内容</h3>"
+            },
+            com3:{
+                template:"<h3>com3组件内容</h3>"
+            },
+            com4:{
+                template:"<h3>com4组件内容</h3>"
+            },
+        }
+      });
+    </script>
+  </body>
+</html>

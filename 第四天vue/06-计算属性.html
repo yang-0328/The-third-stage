@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            padding: 20px;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      
+    <div id="app">
+       请输入人名币:<input type="text" v-model.number="rmb">
+       美元:<input type="text" v-model="num">
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            rmb:"",
+            userFirstName:"",
+            userLastName:""
+          };
+        },
+        // computed  和 methods都是差不多
+        computed: { // 计算属性
+            num(){ // num  计算属性 
+                return this.rmb * 0.1427
+            }
+        },
+        methods: { // 方法
+            total(){
+                return  this.userFirstName + this.userLastName;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

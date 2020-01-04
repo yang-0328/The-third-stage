@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <!-- 编译作用域  编译范围是父元素 -->
+        <h2>{{ title }}</h2>
+        <com>{{ title }}</com>
+    </div>
+    <template id="com">
+        <h2>
+            组件模板内容<slot>不凡学院</slot>
+        </h2>
+    </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+              title:"标题"
+          };
+        },
+        components:{
+            com:{
+                template:"#com",
+                data () {
+                    return {
+                        title:"组件内的属性"
+                    }
+                }
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

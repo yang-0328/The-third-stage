@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+        body,html{
+            height: 100%;
+        }
+        .mask{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            padding: 20px;
+            width: 200px;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btngroup{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .info{
+            padding: 20px 0;
+        }
+    </style>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- $ref 用于获取子组件或者子元素里面的属性或方法 -->
+      <!--  -->
+    <div id="app">
+        <button @click="getMaskInfo">
+            获取mask组件里面的属性
+        </button>
+        <!-- 1. 给需要获取的组件起个名称 -->
+        <masks ref="mask">
+        </masks>
+        <mask1 ref="mask1"></mask1>
+    </div>
+    <template id="com">
+        <div>
+            123
+        </div>
+     </template>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+              title:"",
+              info:"不凡学院",
+              img:"./img/logo.png",
+              isMaskShow:false,
+              tag:1
+          };
+        },
+        methods: {
+            ale(){
+                alert(this.info)
+            },
+            getMaskInfo(){
+                // 2. $ref 获取子组件里面的属性或方法
+                console.log(this.$refs.mask.ale())
+            }
+        },
+        components:{
+            masks:{
+                template:"#com",
+                data () {
+                    return {
+                        info:"mask的详情"
+                    }
+                },
+                methods:{
+                    ale(){
+                        alert(this.info)
+                    }
+                },
+                created () {
+                    // 获取父元素里面的属性或方法  this.$parent
+                    // 如果在组件当中使用了 this.$parent的话 组件的复用性将会大大的缩小
+                    // console.log(this.$parent.info)
+                },
+            },
+            mask1:{
+                template:"#com",
+                data () {
+                    return {
+                        info:"mask的详情"
+                    }
+                },
+                created () {
+                    // 获取父元素里面的属性或方法  this.$parent
+                    // 如果在组件当中使用了 this.$parent的话 组件的复用性将会大大的缩小
+                    // console.log(this.$parent.info)
+                },
+            }
+        }
+      });
+    </script>
+  </body>
+</html>

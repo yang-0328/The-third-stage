@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+      <!-- 三元运算符动态绑定class -->
+    <div id="app">
+       {{ num }}
+       <button @click="num++">
+            点击
+       </button>
+    </div>
+    <script>
+        //  生命周期总共有8个
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+           num:5
+          };
+        },
+        methods:{
+            ale(){
+                alert(this.num);
+            }
+        },
+        // 创建阶段的生命周期钩子
+        beforeCreate () { // beforeCreate 生命周期钩子里面不能获取到data或methods里面的属性或方法
+            // beforeCreate 没啥用
+            console.log("beforeCreate",this.num);
+        },
+        created () { // 在created里面 可以获取到属性和方法 
+            // 在created  钩子里面进行页面的初始化操作(ajax 获取页面的数据)
+            this.num = 10;
+            console.log("created",this.num);
+        },
+        // beforeMount vue首先找到id=app的区域 在内存中生成虚拟dom树
+        beforeMount () {
+            console.log("beforeMount",this.num);
+        },
+        // 虚拟dom 渲染到页面中 渲染完成之后 走到mounted 生命周期钩子
+        mounted () {
+            // 主要作用用于插件的初始化 swiper 
+            // swiper
+            console.log("mounted",this.num);
+        },
+        // 运行阶段的生命周期钩子
+        // 在data 里面数据的时候执行的钩子函数 
+        // beforeUpdate 数据是最新的  页面里面的数据是旧的
+        beforeUpdate () {
+            console.log("beforeUpdate",this.num)
+        },
+        // 在data里面数据更改完成之后执行的钩子函数
+        // updated 钩子里面 数据是最新的  页面的数据 也是最新的
+        updated () {
+            console.log("updated",this.num)
+        },
+        // 销毁阶段的生命周期钩子函数 
+        beforeDestroy () {
+            
+        },
+        destroyed () {
+            
+        },
+        methods: {
+            add(){
+                this.num ++ ;
+            }
+        }
+      });
+    </script>
+  </body>
+</html>
